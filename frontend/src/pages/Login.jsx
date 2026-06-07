@@ -24,7 +24,8 @@ function Login() {
   const handleChange = (event) => setForm({ ...form, [event.target.name]: event.target.value });
 
   const handleContinue = async () => {
-    if (!form.email) {
+    const email = form.email.trim().toLowerCase();
+    if (!email) {
       setError("Please enter your email to continue.");
       return;
     }
@@ -33,8 +34,8 @@ function Login() {
     setError("");
 
     try {
-      const res = await api.post("/auth/login", { email: form.email });
-      const user = res.data.user || { email: form.email, role: "user" };
+      const res = await api.post("/auth/login", { email });
+      const user = res.data.user || { email, role: "user" };
       const token = res.data.token || res.data.accessToken;
 
       if (user.role === "admin") {
@@ -65,10 +66,10 @@ function Login() {
         {error && <p className="error-text">{error}</p>}
 
         <div className="login-actions">
-          <button className="btn btn-outline-dark" type="button" disabled={loading} onClick={() => handleContinue("google")}> 
+          <button className="btn btn-outline-dark" type="button" disabled={loading} onClick={handleContinue}> 
             <FaGoogle /> Continue with Google
           </button>
-          <button className="btn btn-gold" type="button" disabled={loading} onClick={() => handleContinue("email")}> 
+          <button className="btn btn-gold" type="button" disabled={loading} onClick={handleContinue}> 
             <FaEnvelope /> Continue with Email
           </button>
         </div>
