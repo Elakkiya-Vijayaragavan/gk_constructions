@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { FaLock } from "react-icons/fa";
 import api from "../services/api";
 
+const OWNER_EMAIL = "kavihari155@gmail.com";
+
 function AdminLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -19,8 +21,14 @@ function AdminLogin() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!email) {
+    const lowerEmail = email.trim().toLowerCase();
+    if (!lowerEmail) {
       setError("Please enter the owner email.");
+      return;
+    }
+
+    if (lowerEmail !== OWNER_EMAIL) {
+      setError(`Only ${OWNER_EMAIL} can access the owner dashboard.`);
       return;
     }
 
@@ -28,9 +36,9 @@ function AdminLogin() {
     setError("");
 
     try {
-      const res = await api.post("/auth/login", { email });
+      const res = await api.post("/auth/login", { email: lowerEmail });
       const token = res.data.token || res.data.accessToken;
-      const user = res.data.user || { email, role: "admin" };
+      const user = res.data.user || { email: lowerEmail, role: "admin" };
 
       if (user.role && user.role !== "admin") {
         setError("Only the owner email can access this page.");
@@ -52,7 +60,7 @@ function AdminLogin() {
       <form className="login-card" onSubmit={handleSubmit}>
         <span className="login-icon"><FaLock /></span>
         <h1>Owner Login</h1>
-        <p>Enter the owner email to access the dashboard.</p>
+        <p>Only the owner email <strong>{OWNER_EMAIL}</strong> can access the admin dashboard.</p>
 
         <label>
           Email

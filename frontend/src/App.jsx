@@ -6,6 +6,7 @@ import ProjectDetails from "./pages/ProjectDetails";
 import Dashboard from "./pages/Dashboard";
 import Gallery from "./pages/Gallery";
 import Login from "./pages/Login";
+import AdminLogin from "./pages/AdminLogin";
 import Profile from "./pages/Profile";
 import AboutPage from "./pages/AboutPage";
 import ServicesPage from "./pages/ServicesPage";
@@ -19,7 +20,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/admin/login" element={<Login />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<ProtectedAdmin><Dashboard /></ProtectedAdmin>} />
         <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
         <Route path="/about" element={<RequireAuth><AboutPage /></RequireAuth>} />
