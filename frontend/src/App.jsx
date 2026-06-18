@@ -20,9 +20,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<ProtectedAdmin><Dashboard /></ProtectedAdmin>} />
-        <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
+        <Route path="/home" element={<RequireAuth><Home /></RequireAuth>} />
         <Route path="/about" element={<RequireAuth><AboutPage /></RequireAuth>} />
         <Route path="/services" element={<RequireAuth><ServicesPage /></RequireAuth>} />
         <Route path="/projects" element={<RequireAuth><Projects /></RequireAuth>} />

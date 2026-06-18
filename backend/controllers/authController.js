@@ -42,15 +42,12 @@ const loginUser = async (req, res) => {
   const lowerEmail = email.toLowerCase();
 
   if (lowerEmail === ADMIN_EMAIL.toLowerCase()) {
-    let user = await User.findOne({ email: lowerEmail });
-    if (!user) {
-      const hashedPassword = await bcrypt.hash(ADMIN_PASSWORD, 10);
-      user = await User.findOneAndUpdate(
-        { email: lowerEmail },
-        { email: lowerEmail, password: hashedPassword, name: "Owner", role: "admin" },
-        { upsert: true, new: true, setDefaultsOnInsert: true }
-      );
-    }
+    const hashedPassword = await bcrypt.hash(ADMIN_PASSWORD, 10);
+    const user = await User.findOneAndUpdate(
+      { email: lowerEmail },
+      { email: lowerEmail, password: hashedPassword, name: "Owner", role: "admin" },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
 
     return res.json({
       user: { name: user.name, email: user.email, phone: user.phone, role: user.role },
