@@ -19,7 +19,7 @@ function Footer() {
     <footer className="footer">
       <div className="container footer-grid">
         <div>
-          <Link to="/" className="brand footer-brand">
+          <Link to="/home" className="brand footer-brand">
             <span className="brand-mark">GK</span>
             <span>{settings?.companyName || "GK Constructions"}</span>
           </Link>
@@ -27,7 +27,7 @@ function Footer() {
 
         <div>
           <h3>Quick Links</h3>
-          <Link to="/">Home</Link>
+          <Link to="/home">Home</Link>
           <Link to="/services">Services</Link>
           <Link to="/projects">Projects</Link>
           <Link to="/gallery">Gallery</Link>

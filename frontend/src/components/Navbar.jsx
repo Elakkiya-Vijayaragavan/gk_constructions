@@ -22,7 +22,7 @@ function Navbar() {
   return (
     <header className="site-header">
       <nav className="navbar container">
-        <Link to="/" className="brand" onClick={closeMenu}>
+        <Link to="/home" className="brand" onClick={closeMenu}>
           <span className="brand-mark">GK</span>
           <span>{settings?.companyName || "GK Constructions"}</span>
         </Link>
@@ -32,7 +32,7 @@ function Navbar() {
         </button>
 
         <div className={`nav-links ${open ? "is-open" : ""}`}>
-          <NavLink to="/" onClick={closeMenu}>Home</NavLink>
+          <NavLink to="/home" onClick={closeMenu}>Home</NavLink>
           <NavLink to="/about" onClick={closeMenu}>About</NavLink>
           <NavLink to="/services" onClick={closeMenu}>Services</NavLink>
           <NavLink to="/projects" onClick={closeMenu}>Projects</NavLink>
